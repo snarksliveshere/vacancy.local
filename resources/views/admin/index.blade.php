@@ -1,4 +1,7 @@
 @extends('layouts.backend')
-<h1>тест админ страница
- {{Auth::user()->name}}
-</h1>
+@section('content')
+    <h1>тест админ страница
+        {{Auth::user()->name}}
+    </h1>
+@endsection
+

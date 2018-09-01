@@ -1,8 +1,10 @@
 @extends('layouts.app')
-<div class="container">
-    @section('nav')
-        @include('partitials.nav.frontend')
-    @endsection
-    @section('content')
-    @endsection
-</div>
+@section('wrapper')
+    <div class="container">
+        <div class="row">
+            <div class="">
+                @yield('content')
+            </div>
+        </div>
+    </div>
+@endsection

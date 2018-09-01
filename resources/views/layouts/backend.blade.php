@@ -1,6 +1,12 @@
 @extends('layouts.app')
-@section('nav')
-    @include('partitials.nav.backend')
+@section('wrapper')
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">NAVIGATIO</div>
+        <div class="col-md-9">
+            @yield('content')
+        </div>
+    </div>
+</div>
 @endsection
-@section('content')
-@endsection
+
