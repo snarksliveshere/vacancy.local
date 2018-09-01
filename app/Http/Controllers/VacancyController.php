@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VacancyCheck;
 use App\Vacancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VacancyController extends Controller
 {
@@ -17,7 +18,7 @@ class VacancyController extends Controller
     {
         $vacancies = Vacancy::with(['users' => function ($q) {
             $q->select('id'); }])
-            ->select('id', 'users_id', 'title', 'description', 'publish', 'email')->get();
+            ->select('id', 'user_id', 'title', 'description', 'publish', 'email')->get();
 
         return view('admin.vacancy.index', compact('vacancies'));
     }
@@ -40,7 +41,9 @@ class VacancyController extends Controller
      */
     public function store(VacancyCheck $request)
     {
-        dd($request->all());
+        $user = Auth::user()->id;
+        Vacancy::add($request->all(), $user);
+        return redirect()->route('vacancy.index');
     }
 
     /**
