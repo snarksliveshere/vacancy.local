@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VacancyCheck;
 use App\Vacancy;
 use Illuminate\Http\Request;
 
@@ -37,9 +38,9 @@ class VacancyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VacancyCheck $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="title" class="col-md-4 col-form-label text-md-right">Заголовок</label>
+                <label for="title" class="col-md-4 col-form-label text-md-right">Описание</label>
                 <div class="col-md-6">
                     <input id="name" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
                            name="description" value="{{ old('description') }}">
@@ -27,8 +27,8 @@
                 <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                           name="email" value="{{ old('email') }}" required>
+                    <input id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                           name="email" value="{{ old('email') }}">
 
                     @if ($errors->has('email'))
                         <span class="invalid-feedback" role="alert">
