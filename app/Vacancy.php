@@ -35,9 +35,9 @@ class Vacancy extends Model
         Session::flash('success', 'Успешна добавлена новая вакансия');
     }
 
-    public function edit($fields, $vacancy)
+    public function edit($fields)
     {
-        $vacancy->fill($fields);
-        $vacancy->save();
+        $this->fill($fields);
+        $this->save();
     }
 }

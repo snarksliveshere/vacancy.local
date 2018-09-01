@@ -34,11 +34,10 @@ class VacancyCheck extends FormRequest
 
     public function rules()
     {
-//        TODO: проверить потом уникальность при редактировании
-        $vacancyTitle = $this->request->get('title');
-        $vacancy = Vacancy::whereTitle($vacancyTitle)->select('id')->first();
+        $vacancy = $this->vacancy ?? '';
+        $id = $vacancy ? $vacancy->id . ',' : '';
         return [
-            'title' => 'required|min:4|different:description|unique:vacancies,title,' . $vacancy->id,
+            'title' => 'required|min:4|different:description|unique:vacancies,title,' . $id . 'user_id',
             'email' => 'required|email',
             'description' => 'required|min:6',
         ];

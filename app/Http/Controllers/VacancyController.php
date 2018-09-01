@@ -81,7 +81,8 @@ class VacancyController extends Controller
      */
     public function update(VacancyCheck $request, Vacancy $vacancy)
     {
-
+        $vacancy->edit($request->all());
+        return redirect()->route('vacancy.index');
     }
 
     /**
