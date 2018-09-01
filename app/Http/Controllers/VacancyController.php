@@ -14,6 +14,10 @@ class VacancyController extends Controller
      */
     public function index()
     {
+        $vacancies = Vacancy::with(['users' => function ($q) {
+            $q->select('id'); }])
+            ->select('id', 'users_id', 'title', 'description', 'publish', 'email')->get();
+
         return view('admin.vacancy.index', compact('vacancies'));
     }
 
@@ -24,7 +28,7 @@ class VacancyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.vacancy.create');
     }
 
     /**
