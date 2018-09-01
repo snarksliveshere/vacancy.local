@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VacancyCheck;
+use App\User;
 use App\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,9 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        $vacancies = Vacancy::with(['users' => function ($q) {
-            $q->select('id'); }])
+        // TODO: тут пойдет проверка, но потом
+        $user = Auth::user();
+        $vacancies = Vacancy::where('user_id', $user->id)
             ->select('id', 'user_id', 'title', 'description', 'publish', 'email')->get();
 
         return view('admin.vacancy.index', compact('vacancies'));
@@ -30,7 +32,8 @@ class VacancyController extends Controller
      */
     public function create()
     {
-        return view('admin.vacancy.create');
+        $user = Auth::user();
+        return view('admin.vacancy.create', compact('user'));
     }
 
     /**
@@ -54,7 +57,8 @@ class VacancyController extends Controller
      */
     public function show(Vacancy $vacancy)
     {
-        //
+
+        return view('admin.vacancy.show', compact('vacancy'));
     }
 
     /**
@@ -65,7 +69,7 @@ class VacancyController extends Controller
      */
     public function edit(Vacancy $vacancy)
     {
-        //
+        return view('admin.vacancy.edit', compact('vacancy'));
     }
 
     /**
@@ -75,9 +79,9 @@ class VacancyController extends Controller
      * @param  \App\Vacancy  $vacancy
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vacancy $vacancy)
+    public function update(VacancyCheck $request, Vacancy $vacancy)
     {
-        //
+
     }
 
     /**

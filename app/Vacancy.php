@@ -34,4 +34,10 @@ class Vacancy extends Model
         $vacancy->save();
         Session::flash('success', 'Успешна добавлена новая вакансия');
     }
+
+    public function edit($fields, $vacancy)
+    {
+        $vacancy->fill($fields);
+        $vacancy->save();
+    }
 }

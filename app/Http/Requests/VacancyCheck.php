@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Vacancy;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,9 +35,10 @@ class VacancyCheck extends FormRequest
     public function rules()
     {
 //        TODO: проверить потом уникальность при редактировании
-        $user = Auth::user();
+        $vacancyTitle = $this->request->get('title');
+        $vacancy = Vacancy::whereTitle($vacancyTitle)->select('id')->first();
         return [
-            'title' => 'required|min:4|different:description|unique:vacancies,title,' . $user->id,
+            'title' => 'required|min:4|different:description|unique:vacancies,title,' . $vacancy->id,
             'email' => 'required|email',
             'description' => 'required|min:6',
         ];
