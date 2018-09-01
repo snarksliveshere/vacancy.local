@@ -14,7 +14,7 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.vacancy.index', compact('vacancies'));
     }
 
     /**

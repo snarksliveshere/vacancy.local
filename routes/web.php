@@ -7,3 +7,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/admin', 'AdminController@index')->name('admin');
+Route::resource('/vacancy', 'VacancyController');
