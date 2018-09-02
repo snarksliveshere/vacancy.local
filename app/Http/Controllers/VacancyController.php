@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VacancyCheck;
+use App\Notifications\FirstAuthorVacancy;
 use App\User;
 use App\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class VacancyController extends Controller
 {
@@ -46,6 +48,7 @@ class VacancyController extends Controller
     {
         $user = Auth::user()->id;
         Vacancy::add($request->all(), $user);
+        Notification::send(Auth::user(), new FirstAuthorVacancy());
         return redirect()->route('vacancy.index');
     }
 
