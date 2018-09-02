@@ -46,6 +46,16 @@
                         @endif
                     </div>
                 </div>
+                @can('see', $vacancy)
+                    <div class="form-group row align-items-center">
+                        <label class="col-md-4 col-form-label text-md-right" for="gridCheck">
+                            Опубликовать
+                        </label>
+                        <div class="col-md-6">
+                            {{ Form::checkbox('publish','1',$vacancy->publish,['class' => 'minimal', 'id' => 'gridCheck']) }}
+                        </div>
+                    </div>
+                @endcan
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">

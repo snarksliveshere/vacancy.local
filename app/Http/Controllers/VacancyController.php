@@ -85,6 +85,8 @@ class VacancyController extends Controller
     public function update(VacancyCheck $request, Vacancy $vacancy)
     {
         $vacancy->edit($request->all());
+        $vacancy->setPublishStatus($request->get('publish'));
+
         return redirect()->route('vacancy.index');
     }
 

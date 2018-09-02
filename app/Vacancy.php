@@ -66,4 +66,14 @@ class Vacancy extends Model
         $this->fill($fields);
         $this->save();
     }
+
+    public function setPublishStatus($request)
+    {
+        if ($request === null) {
+            $this->publish = 0;
+        } else {
+            $this->publish = 1;
+        }
+        $this->save();
+    }
 }

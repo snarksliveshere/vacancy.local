@@ -31,6 +31,7 @@
                     @else
                         <i class="fas fa-check-circle btn-lg"></i>
                     @endif
+                    {{ Form::close() }}
                 </td>
                 <td><a href="{{ route('vacancy.edit', $vacancy->id) }}"><i class="fas fa-edit btn-lg"></i></a></td>
                 <td><a href="{{ route('vacancy.show', $vacancy->id) }}">Перейти</a></td>

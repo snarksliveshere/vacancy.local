@@ -26,4 +26,6 @@ class VacancyPolicy
         }
         return false;
     }
+
+
 }
