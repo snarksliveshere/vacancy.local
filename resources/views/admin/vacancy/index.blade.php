@@ -17,7 +17,14 @@
             <tr>
                 <td>{{ $vacancy->id }}</td>
                 <td>{{ $vacancy->title }}</td>
-                <td>{{ $vacancy->email }}</td>
+                <td>{{ $vacancy->email }}
+                    @can('see', $vacancy)
+                        <div class="border">
+                            Id автора {{ $vacancy->users->id }}<br>
+                            Имя автора: {{ $vacancy->users->name }}<br>
+                        </div>
+                    @endcan
+                </td>
                 <td>
                     @if($vacancy->publish === 0)
                         <i class="fas fa-lock btn-lg"></i>
