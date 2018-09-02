@@ -76,14 +76,14 @@ class VacancyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vacancy  $vacancy
-     * @return \Illuminate\Http\Response
+     * @param VacancyCheck $request
+     * @param Vacancy $vacancy
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(VacancyCheck $request, Vacancy $vacancy)
     {
+        $this->authorize('checkUser', $vacancy);
         $vacancy->edit($request->all());
         $vacancy->setPublishStatus($request->get('publish'));
 
@@ -91,13 +91,13 @@ class VacancyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Vacancy  $vacancy
-     * @return \Illuminate\Http\Response
+     * @param Vacancy $vacancy
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Vacancy $vacancy)
     {
+        $this->authorize('checkUser', $vacancy);
         $vacancy->delete();
         return redirect()->route('vacancy.index');
     }

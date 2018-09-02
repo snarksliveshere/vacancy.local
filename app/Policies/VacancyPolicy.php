@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use App\Vacancy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class VacancyPolicy
@@ -22,6 +23,14 @@ class VacancyPolicy
     public function see(User $user)
     {
         if ((null !== $user->roles()->first()) && $user->roles()->first()->name === 'moderator') {
+            return true;
+        }
+        return false;
+    }
+
+    public function checkUser(User $user, Vacancy $vacancy)
+    {
+        if($user->id == $vacancy->user_id) {
             return true;
         }
         return false;
