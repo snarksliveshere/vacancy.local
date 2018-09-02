@@ -9,6 +9,7 @@ class PageController extends Controller
 {
     public function vacancies()
     {
+        // TODO: переформатировать дату тут и там
         $vacancies = Vacancy::with(['users' => function ($q) {
                                     $q->select('id', 'name');}])
                     ->wherePublish(1)
@@ -18,6 +19,7 @@ class PageController extends Controller
 
     public function vacanciesShow($id)
     {
+
         $vacancy = Vacancy::with(['users' => function ($q) {
             $q->select('id', 'name');}])
             ->whereId($id)->select('id', 'user_id', 'title', 'description', 'email', 'updated_at')->firstOrFail();
