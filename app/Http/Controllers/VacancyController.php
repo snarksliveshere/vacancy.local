@@ -17,7 +17,6 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        // TODO: тут пойдет проверка, но потом
         $user = Auth::user();
         if((null !== $user->roles()->first()) && $user->roles()->first()->name === 'moderator') {
             $vacancies = Vacancy::with('users')->select('id', 'user_id', 'title', 'description', 'publish', 'email')->get();

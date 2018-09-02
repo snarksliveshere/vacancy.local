@@ -76,4 +76,9 @@ class Vacancy extends Model
         }
         $this->save();
     }
+
+    public function getDate()
+    {
+        return $this->asDateTime($this->updated_at)->format('Y-m-d H:i');
+    }
 }

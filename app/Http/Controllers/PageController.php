@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Vacancy;
 use Illuminate\Http\Request;
 
@@ -25,4 +26,5 @@ class PageController extends Controller
             ->whereId($id)->select('id', 'user_id', 'title', 'description', 'email', 'updated_at')->firstOrFail();
         return view('frontend.vacancy.show', compact('vacancy'));
     }
+
 }

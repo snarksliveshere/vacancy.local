@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\CaptchaRequest;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -22,14 +25,33 @@ class RegisterController extends Controller
     |
     */
 
+
+
     use RegistersUsers;
+
+//    public function testRegister(CaptchaRequest $request)
+//    {
+//        $this->register($request);
+//    }
+
+    public function register(CaptchaRequest $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -72,5 +94,10 @@ class RegisterController extends Controller
         $role = Role::whereName('author')->first();
         $user->roles()->save($role);
         return $user;
+    }
+
+    public function registered($request, $user)
+    {
+        return false;
     }
 }

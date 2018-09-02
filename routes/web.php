@@ -7,6 +7,7 @@ Route::group(['as' => 'frontend.'], function (){
 
 });
 Auth::routes();
+//Route::post('register', 'Auth\RegisterController@testRegister');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::resource('/vacancy', 'VacancyController')->middleware('auth');
