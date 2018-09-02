@@ -35,7 +35,7 @@ class VacancyCheck extends FormRequest
     public function rules()
     {
         $vacancy = $this->vacancy ?? '';
-        $id = $vacancy ? $vacancy->id . ',' : '';
+        $id = $vacancy ? $vacancy->id : '';
         return [
             'title' => 'required|min:4|different:description|unique:vacancies,title,' . $id,
             'email' => 'required|email',
