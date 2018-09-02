@@ -1,5 +1,6 @@
 @extends('layouts.backend')
 @section('content')
+
     <table class="table">
         <thead>
         <tr>

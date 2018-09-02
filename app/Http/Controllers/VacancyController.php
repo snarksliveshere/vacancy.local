@@ -19,9 +19,11 @@ class VacancyController extends Controller
     {
         // TODO: тут пойдет проверка, но потом
         $user = Auth::user();
-        $vacancies = Vacancy::where('user_id', $user->id)
-            ->select('id', 'user_id', 'title', 'description', 'publish', 'email')->get();
-
+        if((null !== $user->roles()->first()) && $user->roles()->first()->name === 'moderator') {
+            $vacancies = Vacancy::with('users')->select('id', 'user_id', 'title', 'description', 'publish', 'email')->get();
+        } else {
+            $vacancies = Vacancy::where('user_id', $user->id)->select('id', 'user_id', 'title', 'description', 'publish', 'email')->get();
+        }
         return view('admin.vacancy.index', compact('vacancies'));
     }
 
