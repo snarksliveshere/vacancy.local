@@ -36,5 +36,13 @@ class VacancyPolicy
         return false;
     }
 
+    public function before(User $user)
+    {
+        if ((null !== $user->roles()->first()) && $user->roles()->first()->name === 'moderator') {
+            return true;
+        }
+        return false;
+    }
+
 
 }
