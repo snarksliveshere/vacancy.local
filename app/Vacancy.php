@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\FirstAuthorVacancy;
+use App\Notifications\ModeratorNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -59,6 +60,12 @@ class Vacancy extends Model
             $this->publish = 1;
             $this->save();
         }
+    }
+
+    public function sendEmail($id)
+    {
+        $user = User::whereName('moderator')->first();
+        Notification::send($user, new ModeratorNotification($id));
     }
 
     public function edit($fields)

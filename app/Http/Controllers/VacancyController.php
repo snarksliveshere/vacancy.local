@@ -48,6 +48,7 @@ class VacancyController extends Controller
         $vacancy = new Vacancy();
         $newVacancy = $vacancy->add($request, $vacancy);
         $newVacancy->checkVacancyCount();
+        $newVacancy->sendEmail($vacancy->id);
         return redirect()->route('vacancy.index');
     }
 
