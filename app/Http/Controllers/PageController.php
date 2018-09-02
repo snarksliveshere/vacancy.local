@@ -10,7 +10,6 @@ class PageController extends Controller
 {
     public function vacancies()
     {
-        // TODO: переформатировать дату тут и там
         $vacancies = Vacancy::with(['users' => function ($q) {
                                     $q->select('id', 'name');}])
                     ->wherePublish(1)
