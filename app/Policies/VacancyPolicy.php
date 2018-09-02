@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\User;
 use App\Vacancy;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class VacancyPolicy
 {
@@ -30,10 +31,15 @@ class VacancyPolicy
 
     public function checkUser(User $user, Vacancy $vacancy)
     {
-        if($user->id == $vacancy->user_id) {
-            return true;
-        }
-        return false;
+//        dump($vacancy->user_id);
+//
+//        dump($user->id);
+//        dd($user->id == $vacancy->user_id);
+        return $user->id == $vacancy->user_id;
+//        if($user->id == $vacancy->user_id) {
+//            return true;
+//        }
+//        return false;
     }
 
     public function before(User $user)
@@ -41,7 +47,7 @@ class VacancyPolicy
         if ((null !== $user->roles()->first()) && $user->roles()->first()->name === 'moderator') {
             return true;
         }
-        return false;
+//        return false;
     }
 
 
