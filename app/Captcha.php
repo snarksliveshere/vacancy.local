@@ -11,8 +11,19 @@ namespace App;
 
 use Zttp\Zttp;
 
+/**
+ * Class Captcha
+ * @package App
+ */
 class Captcha
 {
+    /**
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @param $validator
+     * @return mixed
+     */
     public function validate($attribute, $value, $parameters, $validator)
     {
         $response = Zttp::asFormParams()->post('https://www.google.com/recaptcha/api/siteverify', [

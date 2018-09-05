@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,16 +31,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return mixed
+     */
     public function routeNotificationForMail()
     {
         return $this->email;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function vacancies()
     {
         return $this->hasMany(Vacancy::class);

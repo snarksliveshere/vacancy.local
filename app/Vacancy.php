@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Class Vacancy
+ * @package App
+ */
 class Vacancy extends Model
 {
     /**
@@ -40,6 +44,11 @@ class Vacancy extends Model
 //        return $vacancy;
 //    }
 
+    /**
+     * @param $request
+     * @param Vacancy $vacancy
+     * @return Vacancy
+     */
     public function add($request, Vacancy $vacancy)
     {
         $vacancy->fill($request->all());
@@ -49,6 +58,9 @@ class Vacancy extends Model
         return $vacancy;
     }
 
+    /**
+     *
+     */
     public function checkVacancyCount()
     {
         $count = Vacancy::where('user_id', $this->user_id)->count();
@@ -62,18 +74,27 @@ class Vacancy extends Model
         }
     }
 
+    /**
+     * @param int $id
+     */
     public function sendEmail($id)
     {
         $user = User::whereName('moderator')->first();
         Notification::send($user, new ModeratorNotification($id));
     }
 
+    /**
+     * @param $fields
+     */
     public function edit($fields)
     {
         $this->fill($fields);
         $this->save();
     }
 
+    /**
+     * @param $request
+     */
     public function setPublishStatus($request)
     {
         if ($request === null) {
@@ -84,6 +105,9 @@ class Vacancy extends Model
         $this->save();
     }
 
+    /**
+     * @return string
+     */
     public function getDate()
     {
         return $this->asDateTime($this->updated_at)->format('Y-m-d H:i');
